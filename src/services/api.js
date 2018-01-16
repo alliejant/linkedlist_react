@@ -9,14 +9,15 @@ const api = axios.create({
   headers: { Accept: "application/json" }
 });
 
-/**
- * This function wraps an axios instance and makes a post
- *  request against it
- * @param {String} path - URI path for some post request
- * @param {Object} data - data object
- */
+ export function setAuthorizationTokenOnHeader(token) {
+  if (token) {
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete api.defaults.headers.common['Authorization'];
+  }
+}
 export function postRequest(path, data) {
-  api
+  return api
     .post(path, data)
     .then(response => {
       return response.data;
@@ -27,7 +28,7 @@ export function postRequest(path, data) {
 }
 
 export function getRequest(path) {
-  api
+  return api
     .get(path)
     .then(response => {
       return response.data;

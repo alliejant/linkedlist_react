@@ -21,18 +21,21 @@ class UserSignupForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.userSignupRequest(this.state);
-        this.setState({
-            email: "",
-            firstName: "",
-            lastName: "",
-            username: "",
-            password: ""
-        });
+        this.props.signup(this.state);
+        
+    }
+    
+    componentWillReceiveProps(nextProps){
+        if (this.props.username===null && nextProps.username){
+            console.log("password in componentWillRecieve", nextProps.password)
+            this.props.login({username: nextProps.username,   
+                               password: nextProps.password})
+            //this.props.history.push('/homepage');
+        }
+        
     }
 
     render() {
-        let { title, description } = this.state;
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="input-area">
@@ -43,7 +46,7 @@ class UserSignupForm extends Component {
                             placeholder="email"
                             onChange={this.handleChange}
                             name="email"
-                            value={description}
+                            value={this.state.email}
                         />
                     </label>
                 </div>
@@ -55,7 +58,7 @@ class UserSignupForm extends Component {
                             placeholder="First Name"
                             onChange={this.handleChange}
                             name="firstName"
-                            value={description}
+                            value={this.state.firstName}
                         />
                     </label>
                 </div>
@@ -67,7 +70,7 @@ class UserSignupForm extends Component {
                             placeholder="Last Name"
                             onChange={this.handleChange}
                             name="lastName"
-                            value={description}
+                            value={this.state.lastName}
                         />
                     </label>
                 </div>
@@ -79,7 +82,7 @@ class UserSignupForm extends Component {
                             placeholder="username"
                             onChange={this.handleChange}
                             name="username"
-                            value={title}
+                            value={this.state.username}
                         />
                     </label>
                 </div>
@@ -91,7 +94,7 @@ class UserSignupForm extends Component {
                             placeholder="password"
                             onChange={this.handleChange}
                             name="password"
-                            value={description}
+                            value={this.state.password}
                         />
                     </label>
                 </div>

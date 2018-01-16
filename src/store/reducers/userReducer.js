@@ -5,6 +5,7 @@ const DEFAULT_STATE = {
   firstName: null,
   lastName: null,
   email: null,
+  password: null,
   currentCompany: null,
   photo: null,
   experience: [],
@@ -19,7 +20,13 @@ const userReducer = (state = DEFAULT_STATE, action) => {
       return { ...state, ...action.user };
     }
     case t.USER_SIGNUP_FAIL: {
-      console.log(action.error);
+     console.log(action.error);
+    }
+    case t.USER_LOGIN_SUCCESS:{
+      return {...state, ...action.user}
+    }
+    case t.USER_LOGIN_FAIL:{
+      console.log(action.error)
     }
     default:
       return { ...state };

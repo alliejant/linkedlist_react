@@ -6,7 +6,7 @@ class UserAuth extends Component {
 		super(props);
 		this.state = {};
 	}
-
+    
 	render() {
 		return <SignupFormContainer />;
 	}
